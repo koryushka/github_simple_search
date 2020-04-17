@@ -15,7 +15,7 @@ class GithubClient
       @results = parsed_body
       true
     else
-      @error = parsed_body['message']
+      @error = parsed_body[:message]
       false
     end
   end
