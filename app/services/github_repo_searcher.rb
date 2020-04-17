@@ -25,6 +25,6 @@ class GithubRepoSearcher
   end
 
   def search_path
-    "#{PATH}?q=#{search_params}}"
+    "#{PATH}?q=#{search_params}"
   end
 end
