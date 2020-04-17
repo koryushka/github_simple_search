@@ -1,0 +1,7 @@
+%table
+  %th Name
+  %th URL
+  %th forks
+  - items.each do |item|
+    %tr
+      = render partial: 'item', locals: { item: item }

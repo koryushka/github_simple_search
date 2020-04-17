@@ -1,0 +1,21 @@
+- if logged_in?
+  = link_to("Logout", logout_path, method: :delete)
+  = form_tag(root_path, method: :get) do
+    = label_tag(:q, "Search for:")
+    = text_field_tag(:q)
+    = submit_tag("Search")
+
+  - if params[:q].present?
+    - data = @search_results.data
+    - if data
+      - items = data['items']
+      %b
+        %br Total Count: #{data['total_count']}
+      %b Search term:
+      = params[:q]
+      - if items.any?
+        = render partial: 'items', locals: { items: items }
+    - else
+      = render partial: 'error', locals: { error: error}
+- else
+  = link_to("Login with Github", "https://github.com/login/oauth/authorize?client_id=#{fetch_from_env('CLIENT_ID')}")
