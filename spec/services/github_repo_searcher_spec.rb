@@ -34,6 +34,7 @@ RSpec.describe(GithubRepoSearcher) do
       let(:error) { 'errosr' }
       let(:client_double) { instance_double('GithubClient', successful?: false, error: error) }
       let(:results) { { total_count: 1, items: [{}] } }
+
       it 'calls client with proper params', aggregate_failures: true do
         expect(GithubClient)
           .to receive(:new).with('/search/repositories?q=rails', github_token).and_return(client_double)
@@ -46,7 +47,8 @@ RSpec.describe(GithubRepoSearcher) do
         before do
           allow(subject).to receive(:client).and_return(client_double)
         end
-        it 'returns proper results' do
+        
+        it 'returns proper error' do
           expect(subject.call).to be_a(SearchResult)
           expect(subject.call.error).to eq(error)
         end

@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 6.0.2.2
+Ruby 2.6.2
 
-Things you may want to cover:
+- Run `bin/setup` to setup the project.
+- Run `rspec` to run tests.
+- Run `rubocop` to run linter.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Put your Github app CLIENT_ID and CLIENT_SECRET to `.env` file

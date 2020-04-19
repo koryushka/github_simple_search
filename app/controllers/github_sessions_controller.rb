@@ -1,10 +1,17 @@
 # frozen_string_literal: true
 
 class GithubSessionsController < ApplicationController
-  def callback
-    session[:github_token] = access_token_fetcher.call if code
+  before_action :render_error, only: :callback, unless: -> { code }
 
-    redirect_to(controller: 'repo_search', action: 'search')
+  def callback
+    github_token = access_token_fetcher.call
+    if github_token
+      session[:github_token] = github_token
+
+      redirect_to(controller: 'repo_search', action: 'search')
+    else
+      render_error
+    end
   end
 
   def logout
@@ -21,5 +28,9 @@ class GithubSessionsController < ApplicationController
 
   def code
     @code ||= params[:code]
+  end
+
+  def render_error
+    render plain: 'Something went wrong'
   end
 end
